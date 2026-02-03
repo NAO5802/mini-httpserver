@@ -3,11 +3,16 @@
  */
 package org.example
 
+import org.example.core.HttpHandler
+import org.example.core.routes
+
 class App {
     val greeting: String
         get() {
             return "Hello World!"
         }
+
+    val app: HttpHandler = routes()
 }
 
 fun main() {
