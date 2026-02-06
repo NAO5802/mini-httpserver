@@ -4,6 +4,10 @@
 package org.example
 
 import org.example.core.HttpHandler
+import org.example.core.Method
+import org.example.core.Response
+import org.example.core.Status.Companion.OK
+import org.example.core.bind
 import org.example.core.routes
 
 class App {
@@ -12,7 +16,14 @@ class App {
             return "Hello World!"
         }
 
-    val app: HttpHandler = routes()
+    val app: HttpHandler = routes(
+        "/ping" bind Method.GET to {
+            Response(OK).body("Pong!")
+        },
+        "/pong" bind Method.GET to {
+            Response(OK).body("Ping!")
+        }
+    )
 }
 
 fun main() {
