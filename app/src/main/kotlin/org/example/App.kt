@@ -3,29 +3,24 @@
  */
 package org.example
 
+import org.example.core.DebuggingFilters.PrintRequest
 import org.example.core.HttpHandler
 import org.example.core.Method
 import org.example.core.Response
 import org.example.core.Status.Companion.OK
 import org.example.core.bind
 import org.example.core.routes
+import org.example.core.then
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
 
-    val app: HttpHandler = routes(
-        "/ping" bind Method.GET to {
-            Response(OK).body("Pong!")
-        },
-        "/pong" bind Method.GET to {
-            Response(OK).body("Ping!")
-        }
-    )
-}
+val app: HttpHandler = routes(
+    "/ping" bind Method.GET to {
+        Response(OK).body("Pong!") },
+    "/pong" bind Method.GET to {
+        Response(OK).body("Ping!")
+    }
+)
 
 fun main() {
-    println(App().greeting)
+    val printingApp: HttpHandler = PrintRequest().then(app)
 }
