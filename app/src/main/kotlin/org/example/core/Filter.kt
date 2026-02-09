@@ -1,5 +1,7 @@
 package org.example.core
 
-interface Filter: (HttpHandler)-> HttpHandler {
+fun interface Filter: (HttpHandler)-> HttpHandler {
     companion object
 }
+
+fun Filter.then(next: HttpHandler): HttpHandler = this(next)
