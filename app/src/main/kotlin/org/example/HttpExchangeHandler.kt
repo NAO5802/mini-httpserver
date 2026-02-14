@@ -10,11 +10,11 @@ import org.example.core.Uri
 import org.example.core.supportedOrNull
 
 class HttpExchangeHandler(private val handler: HttpHandler): com.sun.net.httpserver.HttpHandler {
-    override fun handle(exchange: HttpExchange): Unit {
+    override fun handle(exchange: HttpExchange) {
        with(exchange){
            try {
                populate(toRequest()?.let(handler) ?: Response(NOT_IMPLEMENTED))
-           }catch (e: Exception){
+           }catch (_: Exception){
                 sendResponseHeaders(500, -1)
            }
            finally {
@@ -23,7 +23,7 @@ class HttpExchangeHandler(private val handler: HttpHandler): com.sun.net.httpser
        }
     }
 
-    private fun HttpExchange.populate(httpResponse: Response): Unit{
+    private fun HttpExchange.populate(httpResponse: Response) {
         httpResponse.headers.forEach{(key, value)-> responseHeaders.add(key, value?: "")}
         sendResponseHeaders(httpResponse.status.code,httpResponse.body.length ?: 0)
         httpResponse.body.stream.use{input -> responseBody.use{input.copyTo(it)}}
