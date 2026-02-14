@@ -10,5 +10,6 @@ data class MemoryRequest(
     override val body: Body = EMPTY
 ) : Request {
     override fun body(body: InputStream, length: Long?): Request = copy(body = Body(body, length))
+    override fun body(body: String): Request = copy(body= Body(body))
     override fun headers(headers: Headers): Request = copy(headers = this.headers + headers)
 }

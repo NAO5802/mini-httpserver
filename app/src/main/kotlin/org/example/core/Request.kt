@@ -7,6 +7,7 @@ interface Request: HttpMessage {
     val uri: Uri
 
     override fun body(body: InputStream, length: Long?): Request
+    override fun body(body: String): Request
     override fun headers(headers: Headers): Request
 
     companion object {

@@ -7,6 +7,7 @@ interface HttpMessage: Closeable {
     val headers: Headers
     val body: Body
 
+    fun body(body: String): HttpMessage
     fun body(body: InputStream, length: Long? = null): HttpMessage
     fun headers(headers: Headers): HttpMessage
 
