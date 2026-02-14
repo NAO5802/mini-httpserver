@@ -6,8 +6,10 @@ package org.example
 import org.example.core.DebuggingFilters.PrintRequest
 import org.example.core.HttpHandler
 import org.example.core.Method
+import org.example.core.MyServer
 import org.example.core.Response
 import org.example.core.Status.Companion.OK
+import org.example.core.asServer
 import org.example.core.bind
 import org.example.core.routes
 import org.example.core.then
@@ -23,4 +25,8 @@ val app: HttpHandler = routes(
 
 fun main() {
     val printingApp: HttpHandler = PrintRequest().then(app)
+
+    val server: MyServer = printingApp.asServer(SunHttp(9000)).start()
+
+    println("Server started on" + server.port())
 }
