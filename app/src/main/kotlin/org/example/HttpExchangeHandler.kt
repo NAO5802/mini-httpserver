@@ -14,7 +14,8 @@ class HttpExchangeHandler(private val handler: HttpHandler): com.sun.net.httpser
        with(exchange){
            try {
                populate(toRequest()?.let(handler) ?: Response(NOT_IMPLEMENTED))
-           }catch (_: Exception){
+           }catch (e: Exception){
+                e.printStackTrace()
                 sendResponseHeaders(500, -1)
            }
            finally {
@@ -32,7 +33,7 @@ class HttpExchangeHandler(private val handler: HttpHandler): com.sun.net.httpser
     private fun HttpExchange.toRequest() : Request? =
         Method.supportedOrNull(requestMethod)?.let{
             Request(it, Uri.of(requestURI.rawPath))
-                .body(requestBody,responseHeaders.getFirst("Content-Length").toLongOrNull())
+            .body(requestBody, requestHeaders.getFirst("Content-Length")?.toLongOrNull())
                 .headers(requestHeaders.toList().flatMap { (key, values) -> values.map{key to it} })
         }
 
