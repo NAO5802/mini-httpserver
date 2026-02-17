@@ -8,3 +8,13 @@ interface Router {
         }
     }
 }
+
+val ALL = Router()
+
+fun Router.and(other: Router):Router = when(this){
+    ALL -> other
+    else -> when(other){
+        ALL -> this
+        else -> Router()
+    }
+}
