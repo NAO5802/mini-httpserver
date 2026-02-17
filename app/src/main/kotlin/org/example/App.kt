@@ -28,5 +28,5 @@ fun main() {
 
     val server: MyServer = printingApp.asServer(SunHttp(9000)).start()
 
-    println("Server started on" + server.port())
+    println("Server started on " + server.port())
 }
