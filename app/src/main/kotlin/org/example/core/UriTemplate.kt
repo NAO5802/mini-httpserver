@@ -1,5 +1,6 @@
 package org.example.core
 
+@ConsistentCopyVisibility
 data class UriTemplate private constructor(private val template: String) {
 
     fun prefixed(prefix: String): UriTemplate = from("$prefix/$template")
