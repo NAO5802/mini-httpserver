@@ -20,6 +20,9 @@ val app: HttpHandler = routes(
         Response(OK).body("Pong!") },
     "/pong" bind Method.GET to {
         Response(OK).body("Ping!")
+    },
+    "/pang" bind Method.GET to {
+        Response(OK).body("Pang!")
     }
 )
 
